@@ -8,26 +8,33 @@
 		<p ng-bind-html="content">
 	</div>
 Likes : {{blogPost.likes}}<br>
-<textarea row="3" cols="30" ng-model="commentTxt" required>
+<textarea rows="3" cols="30" ng-model="commentTxt" required>
 
 </textarea><span style="color:red">{{error}}</span><br>
-<button class="btn btn-info" ng-click="addComment(blogPost,commentTxt)">POST COMMENT</button>
+<button class="btn btn-info" ng-click="addComment(blogPost,commentTxt)" >POST COMMENT</button>
 <br>
-<b>{{blogComment.commentTxt}},&nbsp;{{blogComment.commentedBy.email}},&nbsp;{{blogComment.commnetedOn | date:'dd:MM:yyyy'}}</b>
+<div ng-hide="blogComment==undefined">
+<b>{{blogComment.commentTxt}},&nbsp;commented By:-{{blogComment.commentedBy.email}},&nbsp;commentedOn:{{blogComment.commentedOn | date:'yyyy:MM:dd'}}</b>
+</div>
 <br>
-<a ng-click="getBlogComments(blogPost.id)"> View ALL Comments</a>
+<a ng-click="getBlogComments(blogPost.id)">View All Comments</a>
 <br>
 <ul style="list-style:none">
 <li ng-repeat="blogComment in blogComments | orderBy:'-commentedOn' ">
 <b>{{blogComment.commentTxt}}</b><br>
-<b>commentedBy - 
+<b>commentedBy -
 <span ng-if="user.email!=blogComment.commentedBy.email">
-{{blogComment.commentedBy.email}}</span>
-<span ng-if="user.email==blogComment.commentedBy.email">
-You
-</span>
-,commentedOn- {{blogComment.commentedOn | date:'dd:MM:yyyy:mm:ss'}}</b>
+ {{blogComment.commentedBy.email}}</span>
+ <span ng-if="user.email==blogComment.commentedBy.email">
+ You 
+ </span>
+ ,commentedOn - {{blogComment.commentedOn | date:'yyyy:MM:dd:mm:ss'}}</b>
 </li>
+
 </ul>
+
 <a href="#/getblogs">Get all blogs</a>
 </div>
+
+
+

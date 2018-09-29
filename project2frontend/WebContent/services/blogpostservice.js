@@ -19,9 +19,11 @@ app.factory('BlogPostService',function($http){
 	blogPostService.getBlog=function(id){
 		return $http.get(BASE_URL + "/getblog/"+id)
 	}
+	
 	blogPostService.getBlogsWaitingForApproval=function(){
-		return $http.get(BASE_URL +"/blogswaitingforapproval")
+		return $http.get(BASE_URL + "/blogswaitingforapproval")
 	}
+	
 	blogPostService.approveBlogPost=function(blogPost){
 		return $http.put(BASE_URL + "/approveblogpost",blogPost)
 	}
@@ -35,14 +37,16 @@ app.factory('BlogPostService',function($http){
     {
     	return $http.get(BASE_URL + "/notifications")
     }
-    //blog- blogpost object
-    //commentTxt- String
-    blogPostService.addComment=function(blog,commentTxt){
-    	return $http.post(BASE_URL + "/addcomment?commentTxt="+commentTxt,blog)
-    }
-    blogPostService.getBlogComments=function(blogPostId){
-    	return $http.get(BASE_URL +"/getcomments/"+blogPostId)
-    }
+    //blog - blogpost object
+    //commentTxt - String
+	blogPostService.addComment=function(blog,commentTxt){
+		return $http.post(BASE_URL + "/addcomment?commentTxt="+commentTxt,blog)
+	}
+	
+	blogPostService.getBlogComments=function(blogPostId){
+		return $http.get(BASE_URL + "/getcomments/"+blogPostId)
+	}
 	return blogPostService;
 	
 })
+

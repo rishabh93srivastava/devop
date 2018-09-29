@@ -17,6 +17,11 @@ app.config(function($routeProvider){
 	.when('/blogswaitingforapproval',{controller:'BlogPostCtrl',templateUrl:'views/listofblogswaitingforapproval.html'})
 	.when('/getblogwaitingforapproval/:id',{controller:'BlogInDetailCtrl',templateUrl:'views/blogapprovalform.html'})
 	.when('/getnotification/:id',{controller:'NotificationCtrl',templateUrl:'views/notificationdetails.html'})
+	.when('/suggestedusers',{controller:'FriendCtrl',templateUrl:'views/suggesteduserslist.html'})
+	.when('/pendingrequests',{controller:'FriendCtrl',templateUrl:'views/pendingrequests.html'})
+	.when('/listoffriends',{controller:'FriendCtrl',templateUrl:'views/friendslist.html'})
+	.when('/uploadprofilepic',{templateUrl:'views/uploadprofilepicture.html'})
+	.when('/chat',{controller:'ChatCtrl',templateUrl:'views/chat.html'})
 	.otherwise({templateUrl:'views/home.html'})
 })
 //Angular module gets instantiated, app.run() will get executed

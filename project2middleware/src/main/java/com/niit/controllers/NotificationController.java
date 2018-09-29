@@ -20,6 +20,9 @@ import com.niit.models.Notification;
 public class NotificationController {
 	@Autowired
 private NotificationDao notificationDao;
+	public NotificationController() {
+		System.out.println("Notification Dao Ctrl");
+	}
 	@RequestMapping(value="/notifications",method=RequestMethod.GET)
 public ResponseEntity<?> getNotificationsNotViewed(HttpSession session){
 	String email=(String)session.getAttribute("loggedInUser");

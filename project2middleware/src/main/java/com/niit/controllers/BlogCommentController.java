@@ -25,14 +25,14 @@ import com.niit.models.User;
 @Controller
 public class BlogCommentController {
 	@Autowired
-	private BlogCommentDao blogCommentDao;
-	@Autowired
-	private UserDao userDao;
-	   @RequestMapping(value="/addcomment",method=RequestMethod.POST)
-	   public ResponseEntity<?> addBlogComment(@RequestBody BlogPost blogPost,@RequestParam String commentTxt,HttpSession session){
+private BlogCommentDao blogCommentDao;
+@Autowired
+private UserDao userDao;
+	@RequestMapping(value="/addcomment",method=RequestMethod.POST)
+	public ResponseEntity<?> addBlogComment(@RequestBody BlogPost blogPost,@RequestParam String commentTxt,HttpSession session){
 		String email=(String)session.getAttribute("loggedInUser");
-		if(email==null) {
-			ErrorClazz errorClazz=new ErrorClazz(5,"Unthorized access..please login...");
+		if(email==null){
+			ErrorClazz errorClazz=new ErrorClazz(5,"Unauthorized access.. please login..");
 			return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.UNAUTHORIZED);
 		}
 		BlogComment blogComment=new BlogComment();
@@ -43,18 +43,16 @@ public class BlogCommentController {
 		blogComment.setCommentedOn(new Date());
 		blogCommentDao.addBlogComment(blogComment);
 		return new ResponseEntity<BlogComment>(blogComment,HttpStatus.OK);
+	}
+	@RequestMapping(value="/getcomments/{blogPostId}",method=RequestMethod.GET)
+	public ResponseEntity<?> getBlogComments(@PathVariable int blogPostId,HttpSession session){
+		String email=(String)session.getAttribute("loggedInUser");
+		if(email==null){
+			ErrorClazz errorClazz=new ErrorClazz(5,"Unauthorized access.. please login..");
+			return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.UNAUTHORIZED);
+		}
 		
-	   }
-	   @RequestMapping(value="/getcomments/{blogPostId}",method=RequestMethod.GET)
-	   public ResponseEntity<?> getBlogComments(@PathVariable int blogPostId,HttpSession session){
-		   String email=(String)session.getAttribute("loggedInUser");
-		   if(email==null) {
-			   ErrorClazz errorClazz=new ErrorClazz(5,"Unthorized access..please login...");
-				return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.UNAUTHORIZED);
-		   }
-		   List<BlogComment> comments=blogCommentDao.getBlogComments(blogPostId);
-		   return new ResponseEntity<List<BlogComment>>(comments,HttpStatus.OK);
-	   }
-	
-
+		List<BlogComment> comments=blogCommentDao.getBlogComments(blogPostId);
+		return new ResponseEntity<List<BlogComment>>(comments,HttpStatus.OK);
+	}
 }

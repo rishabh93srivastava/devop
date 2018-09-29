@@ -39,24 +39,25 @@ app.controller('BlogInDetailCtrl',function($scope,$location,BlogPostService,$rou
 	
 	$scope.addComment=function(blog,commentTxt){
 		if(commentTxt==undefined || commentTxt=="")
-			$scope.error='please enter some comment...'
-			else
-				BlogPostService.addComment(blog,commentTxt).then(function(response){
-					alert('added blogcomment successfully')
-					$scope.commentTxt=""
-					$scope.error=""
-					$scope.blogComment=response.data	
-				},function(response){
-					if(response.status==401)
-						$location.path('/login')
-				})
-	}
-	$scope.getBlogComments=function(blogPostId){
-		BlogPostService.getBlogComments(blogPostId).then(function (response){
-			$scope.blogComments=response.data//result of query (select * from blogcomment)
+			$scope.error='please enter some comments.. '
+			else 
+		BlogPostService.addComment(blog,commentTxt).then(function(response){
+			$scope.commentTxt=""
+			$scope.error=""
+			$scope.blogComment=response.data
 		},function(response){
 			if(response.status==401)
 				$location.path('/login')
 		})
+	}
+	
+	$scope.getBlogComments=function(blogPostId){
+		BlogPostService.getBlogComments(blogPostId).then(
+				function(response){
+					$scope.blogComments=response.data//result of query[select * from blogcomment where blogpost_id=?]
+				},function(response){
+					if(response.status==401)
+						$location.path('/login')
+				})
 	}
 })

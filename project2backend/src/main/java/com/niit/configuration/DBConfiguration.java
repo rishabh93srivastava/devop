@@ -30,7 +30,7 @@ public class DBConfiguration {
 		lsf.addProperties(hibernateProperties);
 		//An array of Class objects of all the entities
 		//Map all entities to relational table
-		Class classes[]=new Class[]{User.class,Job.class,BlogPost.class,Notification.class,BlogComment.class,Friend.class};
+		Class classes[]=new Class[]{User.class,Job.class,BlogPost.class,Notification.class,BlogComment.class,Friend.class,ProfilePicture.class};
 		//localsesionfactorybuilder -> sessionfactory -> map all entities with relation table
 		System.out.println("SessionFactory bean " + lsf);
 	    return lsf.addAnnotatedClasses(classes).buildSessionFactory();
